@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: light --default, night;
+}
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+
+  /* Brand Colors - Adjusted for Care.xyz Professionalism */
+  /* Primary: Deep Teal (Trust & Health) */
+  --color-primary: oklch(38% 0.12 215); 
+  /* Secondary: Soft Coral (Warmth & Empathy) */
+  --color-secondary: oklch(65% 0.18 35);
+  /* Accent: Warm Amber (Attention for Booking) */
+  --color-accent: oklch(82% 0.15 80);
+
+  /* Base Backgrounds */
+  --color-base-100: oklch(100% 0 0);      /* Page background */
+  --color-base-200: oklch(98% 0.005 215); /* Lightest grey-teal for sections */
+  --color-base-300: oklch(95% 0.01 215);  /* Borders and dividers */
+
+  /* Neutral - Dark slate for professional text */
+  --color-neutral: oklch(25% 0.02 215);
+  --color-neutral-content: oklch(98% 0 0);
+
+  /* Feedback */
+  --color-success: oklch(75% 0.15 150);
+  --color-error: oklch(65% 0.22 25);
+  --color-info: oklch(70% 0.12 210);
+
+  /* DaisyUI Component Variables */
+  --rounded-box: 1.5rem;
+  --rounded-btn: 0.75rem;
+  --padding-card: 2rem;
+}
+
+/* Custom variant for dark mode toggle support */
+@custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
