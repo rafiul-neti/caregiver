@@ -47,7 +47,7 @@ const WhyUs = () => {
         
         {/* Section Header */}
         <div className="text-center mb-16 space-y-4">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-neutral">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-neutral">
             Your Family’s Safety is <span className="text-primary">Our Only Priority</span>
           </h2>
           <p className="text-lg text-neutral/60 max-w-2xl mx-auto">
