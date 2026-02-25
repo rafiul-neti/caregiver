@@ -174,7 +174,7 @@ const ServiceDetail = async ({ params }) => {
                 </div>
 
                 <Link
-                  href={`/booking?service=${id}`}
+                  href={`/booking/${id}`}
                   className="btn btn-primary btn-block text-white btn-lg shadow-lg"
                 >
                   Book This Service
