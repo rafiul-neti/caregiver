@@ -9,7 +9,7 @@ const Navlink = ({ href, children }) => {
   const isActive = href === "/" ? path === "/" : path.startsWith(href);
 
   return (
-    <Link className={`${isActive && "text-primary"} font-medium`} href={href}>
+    <Link className={`${isActive && "text-primary"} font-medium text-base`} href={href}>
       {children}
     </Link>
   );

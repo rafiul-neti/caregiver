@@ -18,7 +18,7 @@ export default function Navbar() {
   );
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -45,13 +45,17 @@ export default function Navbar() {
             {links}
           </ul>
         </div>
-        <Link href={`/`}>CARE</Link>
+        <Link className="text-3xl font-bold" href={`/`}>
+          CARE.<span className="text-primary">xyz</span>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <Link href={`/login`} className="btn btn-primary">Login</Link>
+        <Link href={`/login`} className="btn text-base btn-primary">
+          Login
+        </Link>
       </div>
     </div>
   );
