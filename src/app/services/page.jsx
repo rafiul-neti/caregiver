@@ -127,7 +127,7 @@ const ServicesPage = () => {
                     href={`/services/${service.id}`}
                     className="btn btn-primary btn-lg px-8 gap-2"
                   >
-                    Book This Service <ArrowRight size={20} />
+                    See Details <ArrowRight size={20} />
                   </Link>
                 </div>
               </div>
