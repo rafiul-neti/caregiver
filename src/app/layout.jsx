@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Navbar from "@/Components/Navbar/Navbar";
 import Footer from "@/Components/Footer/Footer";
+import ToasterProvider from "@/Components/Providers/ToasterProvider";
 // import Banner from "@/Components/Home/Banner/Banner";
 
 const geistSans = Geist({
@@ -41,6 +42,7 @@ export default function RootLayout({ children }) {
         <footer>
           <Footer />
         </footer>
+        <ToasterProvider />
       </body>
     </html>
   );
