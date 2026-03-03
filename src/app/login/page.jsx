@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import LoginForm from "@/Components/Auth/LoginForm";
 import SocialLogin from "@/Components/Buttons/SocialLogin";
 import { Suspense } from "react";
@@ -29,7 +30,13 @@ const LoginPage = () => {
         </div>
 
         {/* Google login */}
-        <SocialLogin />
+        <Suspense
+          fallback={
+            <span className="loading loading-spinner loading-md"></span>
+          }
+        >
+          <SocialLogin />
+        </Suspense>
       </div>
     </div>
   );

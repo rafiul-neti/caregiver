@@ -1,7 +1,8 @@
+export const dynamic = "force-dynamic";
 import Link from "next/link";
 import RegisterForm from "@/components/Auth/RegisterForm";
-import SocialLogin from "@/components/Buttons/SocialLogin";
 import { Suspense } from "react";
+import SocialLogin from "@/Components/Buttons/SocialLogin";
 
 export default function RegisterPage() {
   return (
@@ -29,7 +30,13 @@ export default function RegisterPage() {
         </div>
 
         {/* Google login */}
-        <SocialLogin />
+        <Suspense
+          fallback={
+            <span className="loading loading-md loading-spinner"></span>
+          }
+        >
+          <SocialLogin />
+        </Suspense>
 
         {/* Login link */}
         <p className="text-center text-sm text-gray-600 mt-6">
