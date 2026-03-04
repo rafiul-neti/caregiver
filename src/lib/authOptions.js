@@ -1,6 +1,7 @@
-// import { generateUserId, loginUser } from "@/actions/server/user";
+import { generateUserId, loginUser } from "@/actions/server/user";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import { collections } from "./dbConnect";
 // import { usersColl } from "./dbConnect";
 
 export const authOptions = {
@@ -19,8 +20,8 @@ export const authOptions = {
       },
       async authorize(credentials, req) {
         // console.log(credentials);
-        // const user = await loginUser(credentials);
-        // return user;
+        const user = await loginUser(credentials);
+        return { ...user, _id: user._id.toString() };
       },
     }),
     GoogleProvider({
@@ -32,23 +33,23 @@ export const authOptions = {
     async signIn({ user, account, profile, email, credentials }) {
       console.log({ user, account, profile, email, credentials });
 
-    //   const isExist = await usersColl.findOne({
-    //     email: user.email,
-    //   });
-    //   if (isExist) {
-    //     return true;
-    //   }
+        const isExist = await collections("users").findOne({
+          email: user.email,
+        });
+        if (isExist) {
+          return true;
+        }
 
-    //   const newUser = {
-    //     userId: await generateUserId(),
-    //     provider: account?.provider,
-    //     name: user.name,
-    //     image: user.image,
-    //     email: user.email,
-    //     role: "user",
-    //   };
-    //   const result = await usersColl.insertOne(newUser);
-    //   return result.acknowledged;
+        const newUser = {
+          userId: await generateUserId(),
+          provider: account?.provider,
+          name: user.name,
+          image: user.image,
+          email: user.email,
+          role: "user",
+        };
+        const result = await usersColl.insertOne(newUser);
+        return result.acknowledged;
     },
     // async redirect({ url, baseUrl }) {
     //   return baseUrl;

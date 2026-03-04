@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import Navbar from "@/Components/Navbar/Navbar";
 import Footer from "@/Components/Footer/Footer";
 import ToasterProvider from "@/Components/Providers/ToasterProvider";
+import NextAuthProvider from "@/Components/Providers/NextAuthProvider";
 // import Banner from "@/Components/Home/Banner/Banner";
 
 const geistSans = Geist({
@@ -25,25 +26,27 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-md">
-          <div className="py-2 md:w-11/12 mx-auto">
-            <Navbar />
-          </div>
-        </header>
+    <NextAuthProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-md">
+            <div className="py-2 md:w-11/12 mx-auto">
+              <Navbar />
+            </div>
+          </header>
 
-        <main>
-          <section>{children}</section>
-        </main>
+          <main>
+            <section>{children}</section>
+          </main>
 
-        <footer>
-          <Footer />
-        </footer>
-        <ToasterProvider />
-      </body>
-    </html>
+          <footer>
+            <Footer />
+          </footer>
+          <ToasterProvider />
+        </body>
+      </html>
+    </NextAuthProvider>
   );
 }

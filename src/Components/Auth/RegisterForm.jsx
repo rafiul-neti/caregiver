@@ -3,6 +3,7 @@ import { useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Eye, EyeOff, UserPlus, CreditCard, Phone } from "lucide-react";
+import { postUser } from "@/actions/server/user";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -46,11 +47,30 @@ const RegisterForm = () => {
     const callbackUrl = params.get("callbackUrl") || "/";
 
     try {
-      console.log("Registering User:", formData);
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate server delay
+      const result = await postUser(formData);
+      if (result.insertedId) {
+        toast.success("User Registration Successfull!");
 
-      toast.success("Account created successfully!");
-      window.location.href = callbackUrl;
+        // Auto-login after successful registration
+        const autoLoginUser = await signIn("credentials", {
+          email: formData.email,
+          password: formData.password,
+          redirect: false,
+        });
+
+        if (autoLoginUser.ok) {
+          // Hard refresh ensures the proxy logic sees the new session immediately
+          setTimeout(() => {
+            window.location.href = callbackUrl;
+          }, 600);
+        } else {
+          // If auto-login fails for some reason, send them to login page
+          window.location.href = "/login";
+        }
+      } else {
+        toast.error(result.message || "User Registration Failed!");
+        setLoading(false);
+      }
     } catch (error) {
       toast.error("Registration failed. Please try again.");
       setLoading(false);

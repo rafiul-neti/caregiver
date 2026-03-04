@@ -1,6 +1,7 @@
 import React from "react";
 import Navlink from "./Navlink";
 import Link from "next/link";
+import AuthButtons from "./AuthButtons";
 
 export default function Navbar() {
   const links = (
@@ -53,9 +54,7 @@ export default function Navbar() {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <Link href={`/login`} className="btn text-base btn-primary">
-          Login
-        </Link>
+        <AuthButtons />
       </div>
     </div>
   );

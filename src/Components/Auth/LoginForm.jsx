@@ -101,7 +101,7 @@ const LoginForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className="btn btn-primary text-white btn-block gap-2 text-lg"
+          className="btn btn-primary text-white btn-block gap-2 text-lg disabled:bg-primary/50"
         >
           {loading ? (
             <span className="loading loading-spinner loading-md"></span>

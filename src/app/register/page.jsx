@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 import Link from "next/link";
-import RegisterForm from "@/components/Auth/RegisterForm";
+import RegisterForm from "@/Components/Auth/RegisterForm";
 import { Suspense } from "react";
 import SocialLogin from "@/Components/Buttons/SocialLogin";
 
