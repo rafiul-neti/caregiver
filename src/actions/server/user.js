@@ -92,7 +92,7 @@ export const loginUser = async (payload) => {
   if (
     !email ||
     !password ||
-    !typeof email === "string" ||
+    typeof email !== "string" ||
     !email.includes("@")
   ) {
     return null;

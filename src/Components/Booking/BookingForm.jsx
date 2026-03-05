@@ -8,6 +8,7 @@ import {
   Calendar,
 } from "lucide-react";
 import toast from "react-hot-toast";
+import { postBookingData } from "@/actions/server/booking";
 
 const PRICE_MAP = {
   "baby-care": 500,
@@ -55,9 +56,11 @@ const BookingForm = ({ serviceId, divisions, districts }) => {
     setLoading(true);
     try {
       // Simulate API call to save to MongoDB
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      toast.success("Booking saved! Status: Pending");
-      setStep(4);
+      const res = await postBookingData({ ...formData, serviceId, totalCost });
+      if (res.success) {
+        toast.success("Booking saved! Status: Pending");
+        setStep(4);
+      }
     } catch (error) {
       toast.error("Something went wrong.");
     } finally {
@@ -89,7 +92,7 @@ const BookingForm = ({ serviceId, divisions, districts }) => {
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="form-control">
-                    <label className="label font-bold text-xs uppercase opacity-60">
+                    <label className="label font-bold text-xs uppercase opacity-60 block">
                       Hours Per Day
                     </label>
                     <input
@@ -103,7 +106,7 @@ const BookingForm = ({ serviceId, divisions, districts }) => {
                     />
                   </div>
                   <div className="form-control">
-                    <label className="label font-bold text-xs uppercase opacity-60">
+                    <label className="label font-bold text-xs uppercase opacity-60 block">
                       Total Days
                     </label>
                     <input

@@ -7,7 +7,7 @@ export const SERVICES = [
     id: 'baby-care',
     title: "Baby Care",
     description: "Expert nurturing and supervision for your little ones, from newborns to toddlers.",
-    image: service1, // Use the warm, safe focus assets we discussed
+    image: service1,
     action: "Book Babysitter"
   },
   {

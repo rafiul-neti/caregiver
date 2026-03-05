@@ -31,7 +31,7 @@ const ServicesOverview = () => {
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral/80 to-transparent opacity-60" />
+                <div className="absolute inset-0 bg-linear-to-t from-neutral/80 to-transparent opacity-60" />
               </figure>
               
               <div className="card-body">
@@ -43,7 +43,7 @@ const ServicesOverview = () => {
                 </p>
                 <div className="card-actions mt-6">
                   <Link 
-                    href={`/service/${service.id}`} 
+                    href={`/services/${service.id}`} 
                     className="btn btn-primary btn-block group-hover:gap-4 transition-all"
                   >
                     {service.action}
