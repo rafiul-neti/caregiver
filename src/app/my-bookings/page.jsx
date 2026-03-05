@@ -3,6 +3,7 @@ import Image from "next/image";
 import { MapPin, Calendar, Clock, Banknote } from "lucide-react";
 import { SERVICES } from "@/data/services/services";
 import Link from "next/link";
+import CancelBookingButton from "@/Components/Buttons/CancelBookingButton";
 
 const MyBookingsPage = async () => {
   const bookings = await getBookingData();
@@ -89,9 +90,7 @@ const MyBookingsPage = async () => {
                   </div>
 
                   <div className="card-actions justify-end mt-4">
-                    <button className="btn btn-error btn-outline btn-sm hover:text-white">
-                      Cancel Booking
-                    </button>
+                    <CancelBookingButton bookingId={booking._id} />
                     <button className="btn btn-primary btn-sm">
                       Contact Support
                     </button>

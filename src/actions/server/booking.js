@@ -1,7 +1,9 @@
 "use server";
 
 import { authOptions } from "@/lib/authOptions";
+import { ObjectId } from "mongodb";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 
 const { collections } = require("@/lib/dbConnect");
 
@@ -65,5 +67,30 @@ export const getBookingData = async () => {
   } catch (error) {
     console.error("Error fetching bookings:", error);
     return []; // Return empty array so the UI doesn't break
+  }
+};
+
+export const deleteBooking = async (bookingId) => {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.email) return { success: false, error: "Unauthorized" };
+
+    // Security: Check both the ID AND the userEmail
+    // This prevents someone from deleting a booking by just guessing an ID
+    const result = await bookingCollection.deleteOne({
+      _id: new ObjectId(bookingId),
+      userEmail: session.user.email,
+    });
+
+    if (result.deletedCount === 1) {
+      // Refresh the data on the page automatically
+      revalidatePath("/my-bookings");
+      return { success: true };
+    }
+
+    return { success: false, error: "Booking not found or unauthorized" };
+  } catch (error) {
+    console.error("Delete Error:", error);
+    return { success: false, error: "Server error" };
   }
 };

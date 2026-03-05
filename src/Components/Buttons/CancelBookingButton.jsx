@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Trash2, AlertTriangle } from "lucide-react";
 import { deleteBooking } from "@/actions/server/booking";
 import toast from "react-hot-toast";
 
 const CancelBookingButton = ({ bookingId }) => {
   const [loading, setLoading] = useState(false);
+  const deleteModalRef = useRef(null)
 
   const handleDelete = async () => {
     setLoading(true);
@@ -14,9 +15,10 @@ const CancelBookingButton = ({ bookingId }) => {
     if (res.success) {
       toast.success("Booking cancelled successfully");
       // Close modal (DaisyUI checkbox/method logic)
-      document.getElementById(`modal_${bookingId}`).close();
+      deleteModalRef.current.close();
     } else {
       toast.error(res.error || "Failed to cancel");
+      deleteModalRef.current.close();
     }
     setLoading(false);
   };
@@ -25,17 +27,15 @@ const CancelBookingButton = ({ bookingId }) => {
     <>
       {/* 1. The Trigger Button */}
       <button
-        className="btn btn-error btn-outline btn-sm gap-2"
-        onClick={() =>
-          document.getElementById(`modal_${bookingId}`).showModal()
-        }
+        className="btn btn-error btn-outline btn-sm gap-2 hover:text-white"
+        onClick={() => deleteModalRef.current.showModal()}
       >
         <Trash2 size={14} /> Cancel Booking
       </button>
 
       {/* 2. The Confirmation Modal */}
       <dialog
-        id={`modal_${bookingId}`}
+        ref={deleteModalRef}
         className="modal modal-bottom sm:modal-middle"
       >
         <div className="modal-box border-t-4 border-error">
