@@ -76,6 +76,52 @@ const SERVICE_DATA = {
   },
 };
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const service = SERVICE_DATA[id];
+
+  // Fallback for non-existent services
+  if (!service) {
+    return {
+      title: "Service Not Found | Care.xyz",
+    };
+  }
+
+  const title = `${service.title} | Care.xyz`;
+  const description = service.description.slice(0, 160);
+  const siteUrl = `https://caregiver-five.vercel.app/services/${id}`;
+
+  return {
+    title: title,
+    description: description,
+
+    openGraph: {
+      title: title,
+      description: description,
+      url: siteUrl,
+      images: [
+        {
+          url:
+            service.image || "https://i.ibb.co.com/BHnnHSG2/services-care.png",
+          width: 1200,
+          height: 630,
+          alt: service.title,
+        },
+      ],
+      type: "website",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      images: [
+        service.image || "https://i.ibb.co.com/BHnnHSG2/services-care.png",
+      ],
+    },
+  };
+}
+
 const ServiceDetail = async ({ params }) => {
   const { id } = await params;
   const service = SERVICE_DATA[id];
