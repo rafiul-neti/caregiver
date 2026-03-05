@@ -5,7 +5,6 @@ import {
   CheckCircle,
   Clock,
   ShieldCheck,
-  MapPin,
   ArrowLeft,
   Star,
 } from "lucide-react";
