@@ -1,6 +1,8 @@
 "use server";
 
 import { authOptions } from "@/lib/authOptions";
+import { bookingInvoice } from "@/lib/bookingInvoice";
+import { sendEmail } from "@/lib/sendEmail";
 import { ObjectId } from "mongodb";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
@@ -11,14 +13,19 @@ const bookingCollection = collections("bookings");
 
 export const postBookingData = async (payload) => {
   try {
-    // 1. Security Check: Get user from Server Session
+    // 1. Security Check
     const session = await getServerSession(authOptions);
     if (!session) throw new Error("Unauthorized access.");
 
-    // 2. Optimized Logic:
+    // 2. Prepare Data
+    const formattedServiceName = payload.serviceId
+      .split("-")
+      .join(" ")
+      .toUpperCase();
+
     const finalData = {
       ...payload,
-      userEmail: session.user.email, // Use session email for integrity
+      userEmail: session.user.email,
       createdAt: new Date(),
       status: "pending",
     };
@@ -29,6 +36,18 @@ export const postBookingData = async (payload) => {
     if (!result.acknowledged) {
       throw new Error("Failed to save booking.");
     }
+
+    // 4. Email Sending
+    sendEmail({
+      to: session.user.email,
+      subject: `Booking Confirmed - ${formattedServiceName}`,
+      html: bookingInvoice({
+        serviceName: formattedServiceName,
+        totalPrice: payload.totalCost,
+        startDate: payload.startDate,
+        location: `${payload.address}, ${payload.district}, ${payload.division}`,
+      }),
+    }).catch((err) => console.error("Background Email Error:", err));
 
     return {
       success: true,
