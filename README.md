@@ -1,4 +1,3 @@
-```
 # Care.xyz | Professional Caregiving Platform
 
 Care.xyz is a modern web application designed to connect families with verified caregivers in Bangladesh. Whether it's nurturing baby care, dignified elderly support, or specialized medical aid, the platform provides a seamless booking experience with automated email invoicing.
@@ -73,15 +72,7 @@ npm run dev
 ```
 
 
-Open [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) with your browser to see the result.
-
----
-
-## 📸 Screenshots
-
-| Home Page | Services |
-| --- | --- |
-|  |  |
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ---
 
