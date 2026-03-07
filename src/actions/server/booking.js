@@ -38,7 +38,7 @@ export const postBookingData = async (payload) => {
     }
 
     // 4. Email Sending
-    sendEmail({
+    await sendEmail({
       to: session.user.email,
       subject: `Booking Confirmed - ${formattedServiceName}`,
       html: bookingInvoice({
