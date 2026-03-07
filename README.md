@@ -1,4 +1,4 @@
-```markdown
+```
 # Care.xyz | Professional Caregiving Platform
 
 Care.xyz is a modern web application designed to connect families with verified caregivers in Bangladesh. Whether it's nurturing baby care, dignified elderly support, or specialized medical aid, the platform provides a seamless booking experience with automated email invoicing.
@@ -90,8 +90,3 @@ Open [http://localhost:3000](https://www.google.com/search?q=http://localhost:30
 This project is optimized for deployment on the **Vercel Platform**.
 
 **Important:** When deploying to Vercel, ensure you add your `MONGOURI`, `NEXTAUTH_SECRET`, and Email credentials in the **Project Settings > Environment Variables** tab. Note that email sending requires `await` in server actions to function correctly in serverless environments.
-
-```
-
-
-```
